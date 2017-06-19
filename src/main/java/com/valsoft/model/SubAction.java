@@ -26,6 +26,14 @@ public class SubAction {
     private Category category;
     public SubAction(){}
 
+    @Column(name = "DESCRIPTION")
+
+    private String description;
+
+    @Column(name = "PICTURE")
+    private String picture;
+
+
     public Long getId() {
         return id;
     }
@@ -65,13 +73,6 @@ public class SubAction {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-
-    @Column(name = "DESCRIPTION")
-
-    private String description;
-
-    @Column(name = "PICTURE")
-    private String picture;
 
 
 }

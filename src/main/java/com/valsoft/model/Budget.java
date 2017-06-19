@@ -15,6 +15,28 @@ import javax.validation.constraints.Size;
 @Table(name = "BUDGET")
 public class Budget {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BUDGET_ID")
+    private Long id;
+
+    @Size(min=3, max=50)
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
+    @Size(min=3, max=150)
+    @Column(name = "DESCRIPTION", nullable = false)
+    private String description;
+
+    //admin
+
+    @NotNull
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Column(name = "CREATION_DATE", nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    private LocalDate creationDate;
+
     public Long getId() {
         return id;
     }
@@ -47,26 +69,5 @@ public class Budget {
         this.creationDate = creationDate;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "BUDGET_ID")
-    private Long id;
-
-    @Size(min=3, max=50)
-    @Column(name = "NAME", nullable = false)
-    private String name;
-
-    @Size(min=3, max=150)
-    @Column(name = "DESCRIPTION", nullable = false)
-    private String description;
-
-    //admin
-
-    @NotNull
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    @Column(name = "CREATION_DATE", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate creationDate;
 
 }

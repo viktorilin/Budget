@@ -35,7 +35,7 @@ public class UserDAO extends AbstractDAO<Long, User> implements IUserDAO {
     }
 
     @Override
-    public List<User> findAllUser() {
+    public List<User> findAllUsers() {
         Criteria criteria = createEntityCriteria();
         return (List<User>) criteria.list();
     }
