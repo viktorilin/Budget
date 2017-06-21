@@ -1,6 +1,7 @@
 package com.valsoft.service;
 
 
+import com.valsoft.dao.IRoleDAO;
 import com.valsoft.dao.RoleDAO;
 import com.valsoft.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@ import java.util.List;
 /**
  * Created by Asus on 19.06.2017.
  */
-@Service("roleService")
+@Service
 @Transactional
 public class RoleService implements IRoleService {
 
     @Autowired
-    private RoleDAO dao;
+    private IRoleDAO dao;
 
     @Override
     public Role findById(Long id) {

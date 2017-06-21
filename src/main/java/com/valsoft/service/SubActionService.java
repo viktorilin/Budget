@@ -1,5 +1,6 @@
 package com.valsoft.service;
 
+import com.valsoft.dao.ISubActionDAO;
 import com.valsoft.dao.SubActionDAO;
 import com.valsoft.model.SubAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 public class SubActionService implements ISubActionService {
 
     @Autowired
-    private SubActionDAO dao;
+    private ISubActionDAO dao;
 
     @Override
     public SubAction findById(Long id) {
@@ -32,8 +33,8 @@ public class SubActionService implements ISubActionService {
     public void updateSubAction(SubAction subAction) {
         SubAction entity = dao.findById(subAction.getId());
         if(entity!=null){
-            entity.setAction(subAction.getAction());
-            entity.setCategory(subAction.getCategory());
+       //     entity.setAction(subAction.getAction());
+      //      entity.setCategory(subAction.getCategory());
             entity.setDescription(subAction.getDescription());
             entity.setPicture(subAction.getPicture());
         }

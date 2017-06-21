@@ -15,15 +15,15 @@ public class SubAction {
     @Column(name = "SUB_ACTION_ID")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "ACTION")
-    @JoinColumn(name = "ACTION_ID")
-    private Action action;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "ACTION")
+//    @JoinColumn(name = "ACTION_ID")
+//    private Action action;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "CATEGORY")
-    @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "CATEGORY")
+//    @JoinColumn(name = "CATEGORY_ID")
+//    private Category category;
     public SubAction(){}
 
     @Column(name = "DESCRIPTION")
@@ -42,21 +42,21 @@ public class SubAction {
         this.id = id;
     }
 
-    public Action getAction() {
-        return action;
-    }
-
-    public void setAction(Action action) {
-        this.action = action;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+//    public Action getAction() {
+//        return action;
+//    }
+//
+//    public void setAction(Action action) {
+//        this.action = action;
+//    }
+//
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
     public String getDescription() {
         return description;

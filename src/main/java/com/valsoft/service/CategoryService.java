@@ -1,6 +1,7 @@
 package com.valsoft.service;
 
 import com.valsoft.dao.CategoryDAO;
+import com.valsoft.dao.ICategoryDAO;
 import com.valsoft.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 public class CategoryService implements ICategoryService {
 
     @Autowired
-    private CategoryDAO dao;
+    private ICategoryDAO dao;
 
     @Override
     public Category findById(Long id) {

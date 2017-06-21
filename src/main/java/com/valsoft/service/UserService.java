@@ -1,5 +1,6 @@
 package com.valsoft.service;
 
+import com.valsoft.dao.IUserDAO;
 import com.valsoft.dao.UserDAO;
 import com.valsoft.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 public class UserService implements IUserService {
 
     @Autowired
-    private UserDAO dao;
+    private IUserDAO dao;
 
     @Override
     public User findById(Long id) {
@@ -37,7 +38,7 @@ public class UserService implements IUserService {
            entity.setEmail(user.getEmail());
            entity.setFirstName(user.getFirstName());
            entity.setSecondName(user.getSecondName());
-           entity.setRole(user.getRole());
+        //   entity.setRole(user.getRole());
            entity.setImage(user.getImage());
         }
     }

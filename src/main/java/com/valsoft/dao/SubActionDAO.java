@@ -3,12 +3,14 @@ package com.valsoft.dao;
 import com.valsoft.model.SubAction;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Asus on 18.06.2017.
  */
+@Repository
 public class SubActionDAO extends AbstractDAO<Long, SubAction> implements ISubActionDAO {
     @Override
     public SubAction findById(Long id) {

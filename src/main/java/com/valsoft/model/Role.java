@@ -1,8 +1,11 @@
 package com.valsoft.model;
 
-import javax.persistence.*;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+/**
+ * Created by Asus on 19.06.2017.
+ */
+
+        import javax.persistence.*;
+
 
 /**
  * Created by Asus on 18.06.2017.
@@ -17,7 +20,7 @@ public class Role {
     private Long id;
 
     @Column(name = "NAME")
-    @Author({"ADMINISTRATOR","MODERATOR","USER"})
+    //@Author({"ADMINISTRATOR","MODERATOR","USER"})
     private String name;
 
     public Long getId() {

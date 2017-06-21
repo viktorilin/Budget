@@ -1,6 +1,7 @@
 package com.valsoft.service;
 
 import com.valsoft.dao.ActionDAO;
+import com.valsoft.dao.IActionDAO;
 import com.valsoft.model.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ActionService implements IActionService {
 
     @Autowired
-    private ActionDAO dao;
+    private IActionDAO dao;
 
     @Override
     public Action findById(Long id) {
@@ -32,7 +33,7 @@ public class ActionService implements IActionService {
     public void updateAction(Action action) {
         Action entity = dao.findById(action.getId());
         if(entity!=null){
-            entity.setBudgetUser(action.getBudgetUser());
+            //entity.setBudgetUser(action.getBudgetUser());
             entity.setType(action.getType());
         }
 

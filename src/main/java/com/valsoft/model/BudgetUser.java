@@ -14,15 +14,15 @@ public class BudgetUser {
     @Column(name = "BUDGET_USER_ID")
     private Long id;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "BUDGET")
-    @JoinColumn(name = "BUDGET_ID")
-    private Budget budget;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "USER")
-    @JoinColumn(name = "USER_ID")
-    private User user;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "BUDGET")
+//    @JoinColumn(name = "BUDGET_ID")
+//    private Budget budget;
+//
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "USER")
+//    @JoinColumn(name = "USER_ID")
+//    private User user;
 
     public BudgetUser() {
     }
@@ -35,28 +35,28 @@ public class BudgetUser {
         this.id = id;
     }
 
-    public Budget getBudget() {
-        return budget;
-    }
-
-    public void setBudget(Budget budget) {
-        this.budget = budget;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+// //   public Budget getBudget() {
+//        return budget;
+//    }
+//
+//   // public void setBudget(Budget budget) {
+//        this.budget = budget;
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     @Override
     public String toString() {
         return "BudgetUser{" +
                 "id=" + id +
-                ", budget=" + budget +
-                ", user=" + user +
+              //  ", budget=" + budget +
+             //   ", user=" + user +
                 '}';
     }
 }

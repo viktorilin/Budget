@@ -4,12 +4,14 @@ import com.valsoft.model.Role;
 import com.valsoft.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Asus on 18.06.2017.
  */
+@Repository
 public class RoleDAO extends AbstractDAO<Long, Role> implements IRoleDAO {
 
     @Override

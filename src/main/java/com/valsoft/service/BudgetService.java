@@ -1,6 +1,7 @@
 package com.valsoft.service;
 
 import com.valsoft.dao.BudgetDAO;
+import com.valsoft.dao.IBudgetDAO;
 import com.valsoft.model.Budget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 public class BudgetService implements IBudgetService {
 
     @Autowired
-    private BudgetDAO dao;
+    private IBudgetDAO dao;
 
     @Override
     public Budget findById(Long id) {
@@ -35,6 +36,7 @@ public class BudgetService implements IBudgetService {
             entity.setName(budget.getName());
             entity.setDescription(budget.getDescription());
             entity.setCreationDate(budget.getCreationDate());
+          //  entity.setUser(budget.getUser());
         }
     }
 

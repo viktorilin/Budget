@@ -1,7 +1,11 @@
 package com.valsoft.controller;
 
+import com.valsoft.dao.RoleDAO;
 import com.valsoft.model.Budget;
+import com.valsoft.model.Role;
 import com.valsoft.service.BudgetService;
+import com.valsoft.service.IRoleService;
+import com.valsoft.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,7 +26,7 @@ import java.util.Locale;
 public class AppController {
 
     @Autowired
-    BudgetService service;
+    IRoleService service;
 
     @Autowired
     MessageSource messageSource;
@@ -33,9 +37,17 @@ public class AppController {
     @RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
     public String listBudgets(ModelMap model) {
 
-        List<Budget> budgets = service.findAllBudgets();
-        model.addAttribute("budgets", budgets);
-        return "allbudgets";
+        System.out.println("gfdgfgdg");
+        Role role1 = new Role();
+        role1.setName("sadsadasd");
+        service.saveRole(role1);
+        Role role2  = new Role();
+        role2.setName("qgfsdfsafa");
+        service.saveRole(role2);
+        List<Role> roles = service.findAllRoles();
+        model.addAttribute("roles", roles);
+        System.out.println(roles);
+        return "index";
     }
 
     /*
@@ -47,7 +59,7 @@ public class AppController {
         Budget budget = new Budget();
         model.addAttribute("budget", budget);
         model.addAttribute("edit", false);
-        return "registration";
+        return "index";
     }
 
     /*
@@ -55,7 +67,7 @@ public class AppController {
      * saving employee in database. It also validates the user input
      */
 //    @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-//    public String saveEmployee(@Valid Employee employee, BindingResult result,
+//    public String saveEmployee(Budget budget,
 //                               ModelMap model) {
 //
 //        if (result.hasErrors()) {
@@ -127,7 +139,7 @@ public class AppController {
 //        service.deleteEmployeeBySsn(ssn);
 //        return "redirect:/list";
 //    }
-
+//
 
 }
 

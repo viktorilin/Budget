@@ -14,11 +14,11 @@ public class Action {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACTION_ID")
     private Long id;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "BUDGET_USER")
-    @JoinColumn(name = "BUDGET_USER_ID")
-    private BudgetUser budgetUser;
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "BUDGET_USER")
+//    @JoinColumn(name = "BUDGET_USER_ID")
+//    private BudgetUser budgetUser;
 
     @Size(min = 3, max = 50)
     @Column(name = "TYPE")
@@ -35,13 +35,13 @@ public class Action {
         this.id = id;
     }
 
-    public BudgetUser getBudgetUser() {
-        return budgetUser;
-    }
-
-    public void setBudgetUser(BudgetUser budgetUser) {
-        this.budgetUser = budgetUser;
-    }
+//    public BudgetUser getBudgetUser() {
+//        return budgetUser;
+//    }
+//
+//    public void setBudgetUser(BudgetUser budgetUser) {
+//        this.budgetUser = budgetUser;
+//    }
 
     public String getType() {
         return type;
@@ -55,7 +55,7 @@ public class Action {
     public String toString() {
         return "Action{" +
                 "id=" + id +
-                ", budgetUser=" + budgetUser +
+                ", budgetUser="  +
                 ", type='" + type + '\'' +
                 '}';
     }

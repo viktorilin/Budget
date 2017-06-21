@@ -10,11 +10,11 @@ import javax.validation.constraints.Size;
  * Created by Asus on 18.06.2017.
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "USER1")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
+    @Column(name = "USER1_ID")
     private Long id;
 
     @Size(min = 3, max = 50)
@@ -36,10 +36,10 @@ public class User {
     @Column(name = "SECOND_NAME", nullable = false)
     private String secondName;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-            @JoinTable(name = "ROLE")
-            @JoinColumn(name = "ROLE_ID")
-    Role role;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//            @JoinTable(name = "ROLE")
+//            @JoinColumn(name = "ROLE_ID")
+//    Role role;
 
     @Column(name = "IMAGE")
     private String image = "";
@@ -94,14 +94,14 @@ public class User {
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 
     public String getImage() {
         return image;
@@ -120,7 +120,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                ", role=" + role +
+             //   ", role=" + role +
                 ", image='" + image + '\'' +
                 '}';
     }

@@ -17,7 +17,7 @@ import java.util.List;
 public class BudgetUserService implements IBudgetUserService {
 
     @Autowired
-    private BudgetUserDAO dao;
+    private IBudgetUserDAO dao;
     @Override
     public BudgetUser findById(Long id) {
         return dao.findById(id);
@@ -32,8 +32,8 @@ public class BudgetUserService implements IBudgetUserService {
     public void updateBudgetUser(BudgetUser budgetUser) {
         BudgetUser entity = dao.findById(budgetUser.getId());
         if (entity!=null){
-            entity.setBudget(budgetUser.getBudget());
-            entity.setUser(budgetUser.getUser());
+       //     entity.setBudget(budgetUser.getBudget());
+        //    entity.setUser(budgetUser.getUser());
         }
     }
 

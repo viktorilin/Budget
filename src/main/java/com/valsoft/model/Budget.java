@@ -29,7 +29,10 @@ public class Budget {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    //admin
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "USER")
+//    @JoinColumn(name = "USER_ID")
+//    private User user;
 
     @NotNull
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -69,5 +72,11 @@ public class Budget {
         this.creationDate = creationDate;
     }
 
-
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }
