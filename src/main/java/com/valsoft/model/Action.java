@@ -2,6 +2,7 @@ package com.valsoft.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * Created by Asus on 18.06.2017.
@@ -14,17 +15,33 @@ public class Action {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACTION_ID")
     private Long id;
-//
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "BUDGET_USER")
-//    @JoinColumn(name = "BUDGET_USER_ID")
-//    private BudgetUser budgetUser;
+
+    @ManyToOne
+    @JoinColumn(name = "BUDGET_USER_ID")
+    private BudgetUser budgetUser;
+
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<SubAction> subActions;
+
+
 
     @Size(min = 3, max = 50)
     @Column(name = "TYPE")
     private String type;
 
     public Action() {
+    }
+
+    public Set<SubAction> getSubActions() {
+        return subActions;
+    }
+
+    public void setSubActions(Set<SubAction> subActions) {
+        this.subActions = subActions;
     }
 
     public Long getId() {
@@ -35,13 +52,21 @@ public class Action {
         this.id = id;
     }
 
-//    public BudgetUser getBudgetUser() {
-//        return budgetUser;
-//    }
-//
-//    public void setBudgetUser(BudgetUser budgetUser) {
-//        this.budgetUser = budgetUser;
-//    }
+    public BudgetUser getBudgetUser() {
+        return budgetUser;
+    }
+
+    public void setBudgetUser(BudgetUser budgetUser) {
+        this.budgetUser = budgetUser;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getType() {
         return type;
@@ -50,6 +75,7 @@ public class Action {
     public void setType(String type) {
         this.type = type;
     }
+
 
     @Override
     public String toString() {

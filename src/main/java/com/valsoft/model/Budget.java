@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * Created by Asus on 18.06.2017.
@@ -29,10 +30,12 @@ public class Budget {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "USER")
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User admin;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<BudgetUser> budgetUsers;
 
     @NotNull
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -72,11 +75,19 @@ public class Budget {
         this.creationDate = creationDate;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(User admin) {
+        this.admin = admin;
+    }
+
+    public Set<BudgetUser> getBudgetUsers() {
+        return budgetUsers;
+    }
+
+    public void setBudgetUsers(Set<BudgetUser> budgetUsers) {
+        this.budgetUsers = budgetUsers;
+    }
 }

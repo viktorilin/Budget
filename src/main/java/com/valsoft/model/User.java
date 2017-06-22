@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * Created by Asus on 18.06.2017.
@@ -36,10 +37,16 @@ public class User {
     @Column(name = "SECOND_NAME", nullable = false)
     private String secondName;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//            @JoinTable(name = "ROLE")
-//            @JoinColumn(name = "ROLE_ID")
-//    Role role;
+    @ManyToOne
+    //@JoinTable(name = "ROLE")
+    @JoinColumn(name = "ROLE_ID", nullable = false)
+    private Role role;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Budget> adminedBudgets;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<BudgetUser> budgetUsers;
 
     @Column(name = "IMAGE")
     private String image = "";
@@ -94,14 +101,14 @@ public class User {
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
-//
-//    public Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Role role) {
-//        this.role = role;
-//    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getImage() {
         return image;
@@ -109,6 +116,22 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Set<Budget> getAdminedBudgets() {
+        return adminedBudgets;
+    }
+
+    public void setAdminedBudgets(Set<Budget> adminedBudgets) {
+        this.adminedBudgets = adminedBudgets;
+    }
+
+    public Set<BudgetUser> getBudgetUsers() {
+        return budgetUsers;
+    }
+
+    public void setBudgetUsers(Set<BudgetUser> budgetUsers) {
+        this.budgetUsers = budgetUsers;
     }
 
     @Override

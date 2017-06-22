@@ -5,6 +5,7 @@ package com.valsoft.model;
  */
 
         import javax.persistence.*;
+        import java.util.Set;
 
 
 /**
@@ -20,8 +21,19 @@ public class Role {
     private Long id;
 
     @Column(name = "NAME")
-    //@Author({"ADMINISTRATOR","MODERATOR","USER"})
+    @Author({"ADMINISTRATOR","MODERATOR","USER"})
     private String name;
+
+    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<User> userSet;
+
+    public Set<User> getUserSet() {
+        return userSet;
+    }
+
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
+    }*/
 
     public Long getId() {
         return id;
