@@ -14,7 +14,7 @@ public interface IBudgetService {
 
     void updateBudget(Budget budget);
 
-    void deleteBudgetById(Long id);
+    void deleteBudgetById(Budget budget);
 
     List<Budget> findAllBudgets();
 }

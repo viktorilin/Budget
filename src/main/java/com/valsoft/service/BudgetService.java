@@ -41,8 +41,8 @@ public class BudgetService implements IBudgetService {
     }
 
     @Override
-    public void deleteBudgetById(Long id) {
-        dao.deleteBudgetById(id);
+    public void deleteBudgetById(Budget budget) {
+        dao.deleteBudgetById(budget);
     }
 
     @Override

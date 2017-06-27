@@ -25,11 +25,9 @@ public class BudgetDAO extends AbstractDAO<Long, Budget> implements IBudgetDAO {
     }
 
     @Override
-    public void deleteBudgetById(Long id) {
+    public void deleteBudgetById(Budget budget) {
 
-        Query query = getSession().createSQLQuery("delete from USER where BUDGET_ID = :id");
-        query.setLong("BUDGET_ID",id);
-        query.executeUpdate();
+      delete(budget);
     }
 
     @Override

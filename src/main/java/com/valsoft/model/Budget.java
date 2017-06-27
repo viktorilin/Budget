@@ -90,4 +90,7 @@ public class Budget {
     public void setBudgetUsers(Set<BudgetUser> budgetUsers) {
         this.budgetUsers = budgetUsers;
     }
+
+
+
 }
