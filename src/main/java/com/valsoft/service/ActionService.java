@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Asus on 19.06.2017.
  */
-@Service("actionService")
+@Service
 @Transactional
 public class ActionService implements IActionService {
 
@@ -37,6 +37,10 @@ public class ActionService implements IActionService {
             entity.setType(action.getType());
         }
 
+    }
+
+    public List<Action> getAllByUserId(Long user_id){
+        return dao.findByUser(user_id);
     }
 
     @Override

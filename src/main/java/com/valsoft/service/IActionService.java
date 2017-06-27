@@ -18,4 +18,6 @@ public interface IActionService {
 
     List<Action> findAllActions();
 
+    List<Action> getAllByUserId(Long user_id);
+
 }

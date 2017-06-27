@@ -1,6 +1,7 @@
-/target/
-.idea/*
-.classpath
-.project
-.settings/
-/bin/
+.idea/
+target/
+*.jar
+*.war
+*.ear
+*.iml
+application.properties

@@ -15,5 +15,7 @@ public interface IActionDAO {
     void deleteActionById(Long id);
 
     List<Action> findAllActions();
+
+    List<Action> findByUser(Long user_id);
 }
 

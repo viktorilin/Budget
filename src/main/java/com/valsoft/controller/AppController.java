@@ -1,145 +1,72 @@
 package com.valsoft.controller;
 
-import com.valsoft.dao.RoleDAO;
+import com.valsoft.model.Action;
 import com.valsoft.model.Budget;
 import com.valsoft.model.Role;
-import com.valsoft.service.BudgetService;
+import com.valsoft.service.ActionService;
+import com.valsoft.service.IActionService;
 import com.valsoft.service.IRoleService;
-import com.valsoft.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Locale;
+
 @Controller
 @RequestMapping("/")
 @ComponentScan("com.valsoft")
 public class AppController {
 
-    @Autowired
-    IRoleService service;
+	@Autowired
+	IRoleService service;
 
-    @Autowired
-    MessageSource messageSource;
 
-    /*
-     * This method will list all existing employees.
-     */
-    @RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-    public String listBudgets(ModelMap model) {
 
-        System.out.println("gfdgfgdg");
-        Role role1 = new Role();
-        role1.setName("sadsadasd");
-        service.saveRole(role1);
-        Role role2  = new Role();
-        role2.setName("qgfsdfsafa");
-        service.saveRole(role2);
-        List<Role> roles = service.findAllRoles();
-        model.addAttribute("roles", roles);
-        System.out.println(roles);
-        return "index";
-    }
+	@Autowired
+	MessageSource messageSource;
 
-    /*
-     * This method will provide the medium to add a new employee.
-     */
-    @RequestMapping(value = { "/new" }, method = RequestMethod.GET)
-    public String newBudget(ModelMap model) {
-        System.out.println("frewnrf");
-        Budget budget = new Budget();
-        model.addAttribute("budget", budget);
-        model.addAttribute("edit", false);
-        return "index";
-    }
+	@Autowired
+	IActionService actionService;
 
-    /*
-     * This method will be called on form submission, handling POST request for
-     * saving employee in database. It also validates the user input
-     */
-//    @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-//    public String saveEmployee(Budget budget,
-//                               ModelMap model) {
-//
-//        if (result.hasErrors()) {
-//            return "registration";
-//        }
-//
-//        /*
-//         * Preferred way to achieve uniqueness of field [ssn] should be implementing custom @Unique annotation
-//         * and applying it on field [ssn] of Model class [Employee].
-//         *
-//         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-//         * framework as well while still using internationalized messages.
-//         *
-//         */
-//        if(!service.isEmployeeSsnUnique(employee.getId(), employee.getSsn())){
-//            FieldError ssnError =new FieldError("employee","ssn",messageSource.getMessage("non.unique.ssn", new String[]{employee.getSsn()}, Locale.getDefault()));
-//            result.addError(ssnError);
-//            return "registration";
-//        }
-//
-//        service.saveEmployee(employee);
-//
-//        model.addAttribute("success", "Employee " + employee.getName() + " registered successfully");
-//        return "success";
-//    }
-//
-//
-//    /*
-//     * This method will provide the medium to update an existing employee.
-//     */
-//    @RequestMapping(value = { "/edit-{ssn}-employee" }, method = RequestMethod.GET)
-//    public String editEmployee(@PathVariable String ssn, ModelMap model) {
-//        Employee employee = service.findEmployeeBySsn(ssn);
-//        model.addAttribute("employee", employee);
-//        model.addAttribute("edit", true);
-//        return "registration";
-//    }
-//
-//    /*
-//     * This method will be called on form submission, handling POST request for
-//     * updating employee in database. It also validates the user input
-//     */
-//    @RequestMapping(value = { "/edit-{ssn}-employee" }, method = RequestMethod.POST)
-//    public String updateEmployee(@Valid Employee employee, BindingResult result,
-//                                 ModelMap model, @PathVariable String ssn) {
-//
-//        if (result.hasErrors()) {
-//            return "registration";
-//        }
-//
-//        if(!service.isEmployeeSsnUnique(employee.getId(), employee.getSsn())){
-//            FieldError ssnError =new FieldError("employee","ssn",messageSource.getMessage("non.unique.ssn", new String[]{employee.getSsn()}, Locale.getDefault()));
-//            result.addError(ssnError);
-//            return "registration";
-//        }
-//
-//        service.updateEmployee(employee);
-//
-//        model.addAttribute("success", "Employee " + employee.getName()  + " updated successfully");
-//        return "success";
-//    }
-//
-//
-//    /*
-//     * This method will delete an employee by it's SSN value.
-//     */
-//    @RequestMapping(value = { "/delete-{ssn}-employee" }, method = RequestMethod.GET)
-//    public String deleteEmployee(@PathVariable String ssn) {
-//        service.deleteEmployeeBySsn(ssn);
-//        return "redirect:/list";
-//    }
-//
+
+
+	/*
+	 * This method will list all existing employees.
+	 */
+	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
+	public String listBudgets(ModelMap model) {
+		List<Action> actions = actionService.getAllByUserId(3L);
+
+		for(Action a : actions){
+			System.out.println(a.getType());
+		}
+
+		return "index";
+	}
+
+
+	@RequestMapping(value = {"/new"}, method = RequestMethod.GET)
+	public String newBudget(ModelMap model) {
+		Budget budget = new Budget();
+		model.addAttribute("budget", budget);
+		model.addAttribute("edit", false);
+		return "index";
+	}
+
+	@RequestMapping(value = {"/registration"}, method = RequestMethod.GET)
+	public String reg()
+	{
+		System.out.println("log");
+		return "registration";
+	}
+
+
+
 
 }
 
