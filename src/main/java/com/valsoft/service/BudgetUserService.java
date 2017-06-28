@@ -46,4 +46,10 @@ public class BudgetUserService implements IBudgetUserService {
     public List<BudgetUser> findAllBudgetUsers() {
         return dao.findAllBudgetUsers();
     }
+
+    @Override
+    public BudgetUser getByuserBudget(Long user_id, Long budget_id){
+        return dao.findByUserBudget(user_id, budget_id);
+    }
+
 }

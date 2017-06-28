@@ -28,7 +28,6 @@ public class Action {
     private Set<SubAction> subActions;
 
 
-
     @Size(min = 3, max = 50)
     @Column(name = "TYPE")
     private String type;

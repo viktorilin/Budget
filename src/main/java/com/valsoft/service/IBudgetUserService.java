@@ -17,4 +17,6 @@ public interface IBudgetUserService {
     void deleteBudgetUserById(Long id);
 
     List<BudgetUser> findAllBudgetUsers();
+
+    BudgetUser getByuserBudget(Long user_id, Long budget_id);
 }

@@ -26,7 +26,7 @@ public class ActionDAO extends AbstractDAO<Long, Action> implements IActionDAO {
 	@Override
 	public void deleteActionById(Long id) {
 		Query query = getSession().createSQLQuery("delete from ACTION where ACTION_ID = :id");
-		query.setLong("ACTION_ID", id);
+		query.setLong("id", id);
 		query.executeUpdate();
 	}
 
@@ -37,10 +37,10 @@ public class ActionDAO extends AbstractDAO<Long, Action> implements IActionDAO {
 	}
 
 	@Override
-	public List<Action> findByUser(Long user_id){
+	public List<Action> findByUserBudget(Long user_budget_id){
 		List<Action> actions = new ArrayList<>();
-		Query query = getSession().createQuery("from Action a WHERE a.budget_user_id = :id");
-		query.setLong("id",user_id);
+		Query query = getSession().createQuery("from Action  WHERE budget_user_id = :id");
+		query.setLong("id",user_budget_id);
 		actions = query.list();
 		return actions;
 	}

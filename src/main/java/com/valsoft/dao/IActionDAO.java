@@ -16,6 +16,6 @@ public interface IActionDAO {
 
     List<Action> findAllActions();
 
-    List<Action> findByUser(Long user_id);
+    List<Action> findByUserBudget(Long user_budget_id);
 }
 

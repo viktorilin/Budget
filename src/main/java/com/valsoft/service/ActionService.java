@@ -39,8 +39,9 @@ public class ActionService implements IActionService {
 
     }
 
-    public List<Action> getAllByUserId(Long user_id){
-        return dao.findByUser(user_id);
+    @Override
+    public List<Action> getAllByUserBudget(Long user_budget_id){
+        return dao.findByUserBudget(user_budget_id);
     }
 
     @Override

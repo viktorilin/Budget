@@ -35,4 +35,12 @@ public class BudgetUserDAO extends AbstractDAO<Long, BudgetUser> implements IBud
         Criteria criteria = createEntityCriteria();
         return (List<BudgetUser>) criteria.list();
     }
+
+   public BudgetUser findByUserBudget(Long user_id, Long  budget_id){
+        Query query = getSession().createQuery("from BudgetUser WHERE budget_id = :p_budget_id and user_id = :p_user_id");
+        query.setParameter("p_budget_id", budget_id);
+        query.setParameter("p_user_id", user_id);
+        return (BudgetUser )query.uniqueResult();
+   }
+
 }

@@ -145,11 +145,11 @@ public class AppController {
     private String deleteBudget(@PathVariable Long id, ModelMap model)
             throws SQLException, IOException {
 
-        System.out.println("asdsadas");
+        /*System.out.println("asdsadas");
         Budget budget = budgetService.findById(id);
-        budgetService.deleteBudgetById(budget);
+        budgetService.deleteBudgetById(budget.getId());
         System.out.println(budget.getId());
-       // budgetService.deleteBudgetById(id);
+       // budgetService.deleteBudgetById(id);*/
         return "redirect:/list";
 
     }
