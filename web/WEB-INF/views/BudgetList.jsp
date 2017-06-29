@@ -16,9 +16,9 @@
 <center>
     <h1>Budget Management</h1>
     <h2>
-        <a href="/new">Add New Budget</a>
+        <a href="/budget/new">Add New Budget</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/list">List All Budgets</a>
+        <a href="/budget/list">List All Budgets</a>
 
     </h2>
 </center>
@@ -39,9 +39,9 @@
                 <td><c:out value="${budget.description}" /></td>
                 <td><c:out value="${budget.name}" /></td>
                 <td>
-                    <a href="/edit?id=<c:out value='${budget.id}' />">Edit</a>
+                    <a href="/budget/edit/<c:out value='${budget.id}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/delete/<c:out value='${budget.id}'/>">Delete</a>
+                    <a href="/budget/delete/<c:out value='${budget.id}'/>">Delete</a>
                 </td>
             </tr>
         </c:forEach>

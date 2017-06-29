@@ -43,7 +43,6 @@ import java.util.Locale;
 @RequestMapping("/")
 @ComponentScan("com.valsoft")
 public class AppController {
-    // private static final long serialVersionUID = 1L;
     @Autowired
     private IBudgetService budgetService;
 //    protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -81,78 +80,6 @@ public class AppController {
 //        }
 //    }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    private String listBudget(ModelMap model)
-            throws SQLException, IOException, ServletException {
-        List<Budget> budgetList = budgetService.findAllBudgets();
-        model.addAttribute("listBudgets", budgetList);
-        return "BudgetList";
-    }
-
-    @RequestMapping(value = "/new")
-    private String showNewForm(ModelMap model)
-            throws ServletException, IOException {
-        model.addAttribute("budget",new Budget());
-        return "BudgetForm";
-    }
-
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    private String showEditForm(ModelMap model)
-            throws SQLException, ServletException, IOException {
-        long id = Long.parseLong((String) model.get("id"));
-        Budget existingBudget = budgetService.findById(id);
-        model.addAttribute("budget", existingBudget);
-        return "redirect:/list";
-    }
-
-
-        @RequestMapping(value = "/insert", method = RequestMethod.POST)
-        private String insertBudget (@ModelAttribute Budget budget, ModelMap model)
-            throws SQLException, IOException {
-            LocalDate localDate = new LocalDate();
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-            String formattedDate = (String) model.get(formatter.print(localDate));
-            // LocalDate creationDate = Long.parseLong(request.getDateHeader("creationDate"));
-            // String creationDate = request.getParameter("creationDate");
-            //LocalDate creationDate = request.getDateHeader("creationDate");
-            String description = (String) model.get("description");
-            String name = (String) model.get("name");
-
-            Budget newBudget = new Budget();
-            newBudget.setDescription(description);
-            newBudget.setName(name);
-            newBudget.setCreationDate(localDate);
-
-            budgetService.saveBudget(newBudget);
-           return "redirect:/list";
-        }
-//
-//    private void updateBudget(HttpServletRequest request, HttpServletResponse response)
-//            throws SQLException, IOException {
-//        Long id = Long.parseLong(request.getParameter("id"));
-//        //String title = request.getParameter("creationDate");
-//        String description = request.getParameter("description");
-//        String name = request.getParameter("name");
-//        LocalDate localDate = new LocalDate();
-//        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-//        String formattedDate = request.getParameter(formatter.print(localDate));
-//        Budget budget = new Budget(id, description, name, localDate);
-//        budgetService.updateBudget(budget);
-//        response.sendRedirect("list");
-//    }
-//
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
-    private String deleteBudget(@PathVariable Long id, ModelMap model)
-            throws SQLException, IOException {
-
-        System.out.println("asdsadas");
-        Budget budget = budgetService.findById(id);
-        budgetService.deleteBudgetById(budget);
-        System.out.println(budget.getId());
-       // budgetService.deleteBudgetById(id);
-        return "redirect:/list";
-
-    }
 
 //    @Autowired
 //    IRoleService service;
@@ -270,6 +197,6 @@ public class AppController {
 //    }
 //
 
-    }
+}
 
 

@@ -24,7 +24,7 @@ public class BudgetUser {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "budgetUser")
     private Set<Action> actions;
 
     public BudgetUser() {
