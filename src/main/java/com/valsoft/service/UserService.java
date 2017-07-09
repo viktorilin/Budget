@@ -38,7 +38,7 @@ public class UserService implements IUserService {
            entity.setEmail(user.getEmail());
            entity.setFirstName(user.getFirstName());
            entity.setSecondName(user.getSecondName());
-        //   entity.setRole(user.getRole());
+           entity.setRole(user.getRole());
            entity.setImage(user.getImage());
         }
     }

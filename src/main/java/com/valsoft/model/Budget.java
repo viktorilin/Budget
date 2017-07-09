@@ -22,11 +22,11 @@ public class Budget {
     @Column(name = "BUDGET_ID")
     private Long id;
 
-    @Size(min=3, max=50)
+  //  @Size(min=3, max=50)
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Size(min=3, max=150)
+    //@Size(min=3, max=150)
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
@@ -34,7 +34,7 @@ public class Budget {
     @JoinColumn(name = "USER_ID")
     private User admin;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "budget")
     private Set<BudgetUser> budgetUsers;
 
     @NotNull

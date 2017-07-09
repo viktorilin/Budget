@@ -18,22 +18,22 @@ public class User {
     @Column(name = "USER1_ID")
     private Long id;
 
-    @Size(min = 3, max = 50)
+   // @Size(min = 3, max = 50)
     @Column(name = "NICK_NAME", nullable = false)
     private String nickName;
 
-    @Size(min = 6, max = 20)
+   // @Size(min = 6, max = 20)
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
-    @Size(min = 3, max = 50)
+ //   @Size(min = 3, max = 50)
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @Size(min = 3, max = 50)
+ //   @Size(min = 3, max = 50)
     @Column(name = "SECOND_NAME", nullable = false)
     private String secondName;
 
@@ -42,14 +42,16 @@ public class User {
     @JoinColumn(name = "ROLE_ID", nullable = false)
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @Column(name = "IMAGE")
+    private String image;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "admin")
     private Set<Budget> adminedBudgets;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
     private Set<BudgetUser> budgetUsers;
 
-    @Column(name = "IMAGE")
-    private String image = "";
+
 
     public User() {
     }

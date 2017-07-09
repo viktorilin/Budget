@@ -36,13 +36,18 @@ public class BudgetService implements IBudgetService {
             entity.setName(budget.getName());
             entity.setDescription(budget.getDescription());
             entity.setCreationDate(budget.getCreationDate());
-          //  entity.setUser(budget.getUser());
+            entity.setAdmin(budget.getAdmin());
         }
     }
 
     @Override
-    public void deleteBudgetById(Budget budget) {
-        dao.deleteBudgetById(budget);
+    public void deleteBudgetById(Long id) {
+        //TODO
+    }
+
+    @Override
+    public void deleteBudget(Budget budget) {
+        dao.deleteBudget(budget);
     }
 
     @Override

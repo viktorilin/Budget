@@ -13,7 +13,9 @@ public interface IBudgetDAO {
 
     void saveBudget(Budget budget);
 
-    void deleteBudgetById(Budget budget);
+    void deleteBudgetById(Long id);
+
+    void deleteBudget(Budget budget);
 
     List<Budget> findAllBudgets();
 }

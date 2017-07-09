@@ -24,8 +24,9 @@ public class Action {
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "action", cascade = CascadeType.ALL)
     private Set<SubAction> subActions;
+
 
 
     @Size(min = 3, max = 50)

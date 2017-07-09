@@ -25,8 +25,12 @@ public class BudgetDAO extends AbstractDAO<Long, Budget> implements IBudgetDAO {
     }
 
     @Override
-    public void deleteBudgetById(Budget budget) {
+    public void deleteBudgetById(Long id) {
+/* TODO */
+    }
 
+    @Override
+    public void deleteBudget(Budget budget) {
       delete(budget);
     }
 
