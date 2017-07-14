@@ -23,11 +23,19 @@ public class ActionDAO extends AbstractDAO<Long, Action> implements IActionDAO {
 		persist(role);
 	}
 
+	public void deleteAction(Action action){
+		getSession().delete(action);
+	}
+
 	@Override
 	public void deleteActionById(Long id) {
 		Query query = getSession().createSQLQuery("delete from ACTION where ACTION_ID = :id");
 		query.setLong("id", id);
 		query.executeUpdate();
+	}
+
+	public void updateAction(Action action){
+		update(action);
 	}
 
 	@Override
@@ -39,10 +47,16 @@ public class ActionDAO extends AbstractDAO<Long, Action> implements IActionDAO {
 	@Override
 	public List<Action> findByUserBudget(Long user_budget_id){
 		List<Action> actions = new ArrayList<>();
-		Query query = getSession().createQuery("from Action  WHERE budget_user_id = :id");
+		Query query = getSession().createQuery("from Action  WHERE budget_user_id = :id ORDER BY id DESC");
 		query.setLong("id",user_budget_id);
-		actions = query.list();
-		return actions;
+		return query.list();
+	}
+
+	@Override
+	public List<Action> findByBudgetId(Long budget_id) {
+		Query query = getSession().createQuery("FROM Action WHERE budgetUser.budget.id = :budget_id ORDER BY id DESC");
+		query.setLong("budget_id", budget_id);
+		return query.list();
 	}
 }
 

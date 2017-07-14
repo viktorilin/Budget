@@ -17,4 +17,8 @@ public interface ISubActionService {
     void deleteSubActionById(Long id);
 
     List<SubAction> findAllSubActions();
+
+    Long addNewSubaction(Long action_id, String description, Double amount);
+
+    Integer getCountSubaction(Long action_id);
 }

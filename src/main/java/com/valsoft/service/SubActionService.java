@@ -2,6 +2,7 @@ package com.valsoft.service;
 
 import com.valsoft.dao.ISubActionDAO;
 import com.valsoft.dao.SubActionDAO;
+import com.valsoft.model.Action;
 import com.valsoft.model.SubAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,24 @@ public class SubActionService implements ISubActionService {
     @Override
     public List<SubAction> findAllSubActions() {
         return dao.findAllSubActions();
+    }
+
+    @Override
+    public Long addNewSubaction(Long action_id, String description, Double amount) {
+        Action action = new Action();
+        action.setId(action_id);
+
+        SubAction subAction = new SubAction();
+        subAction.setAction(action);
+        subAction.setDescription(description);
+        subAction.setAmount(amount);
+        subAction.setPicture("none");
+        dao.saveSubAction(subAction);
+        return subAction.getId();
+    }
+
+    @Override
+    public Integer getCountSubaction(Long action_id) {
+        return dao.getCountSubcategories(action_id);
     }
 }

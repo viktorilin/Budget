@@ -16,15 +16,15 @@ public class BudgetUser {
     @Column(name = "BUDGET_USER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BUDGET_ID")
     private Budget budget;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "budgetUser")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "budgetUser")
     private Set<Action> actions;
 
     public BudgetUser() {

@@ -10,12 +10,18 @@ import java.util.List;
 public interface IActionDAO {
     Action findById(Long id);
 
-    void saveAction(Action role);
+    void saveAction(Action action);
 
     void deleteActionById(Long id);
+
+    void deleteAction(Action action);
+
+    void updateAction(Action action);
 
     List<Action> findAllActions();
 
     List<Action> findByUserBudget(Long user_budget_id);
+
+    List<Action> findByBudgetId(Long budget_id);
 }
 

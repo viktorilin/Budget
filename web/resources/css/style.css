@@ -1,0 +1,52 @@
+.panel-signin{
+    margin-top:50px;
+}
+
+.regbutton{
+    margin-top:8px;
+}
+
+.left-navbar{
+    margin-top:55px;
+}
+
+.subaction_link{
+    width:100px;
+}
+
+.sub-action-table{
+    margin-top: 30px;
+}
+
+.amount{
+    width:100px;
+}
+
+.subaction-pabel{
+    margin-bottom: 0px;
+}
+
+.table>tbody>tr>td.form-add-row{
+    height:40px;
+    position: relative;
+    padding:0;
+}
+
+#dLabel{
+    margin-top:8px;
+    display: inline-block;
+}
+
+.form-add-subaction{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    border-radius:0;
+    padding:0;
+    margin:0;
+}
+
+.addsubaction-form{
+    margin-bottom:0;
+}

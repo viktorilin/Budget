@@ -17,4 +17,7 @@ public interface IBudgetUserDAO {
     List<BudgetUser> findAllBudgetUsers();
 
     BudgetUser findByUserBudget(Long user_id, Long  budget_id);
+
+    Long getBudgetUserID(Long userId, Long budgetId);
+
 }

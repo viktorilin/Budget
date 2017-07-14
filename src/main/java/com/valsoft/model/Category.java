@@ -1,6 +1,8 @@
 package com.valsoft.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Asus on 18.06.2017.
@@ -15,8 +17,20 @@ public class Category {
     private Long id;
 
     @Column(name = "NAME")
-    @Author({"category_name"})//???
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.LAZY)
+    private Set<SubCategory> subCategories = new HashSet<>();
+
+    public Set<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(Set<SubCategory> subCategories) {
+        this.subCategories = subCategories;
+    }
+
+
 
     public Category() {
     }

@@ -21,7 +21,7 @@ public class BudgetDAO extends AbstractDAO<Long, Budget> implements IBudgetDAO {
 
     @Override
     public void saveBudget(Budget budget) {
-     persist(budget);
+        persist(budget);
     }
 
     @Override

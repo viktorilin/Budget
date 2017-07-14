@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -30,12 +31,12 @@ public class Budget {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User admin;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "budget")
-    private Set<BudgetUser> budgetUsers;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "budget")
+    private Set<BudgetUser> budgetUsers = new HashSet<>();
 
     @NotNull
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -91,6 +92,15 @@ public class Budget {
         this.budgetUsers = budgetUsers;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Budget{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", admin=" + admin +
+                ", budgetUsers=" + budgetUsers +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

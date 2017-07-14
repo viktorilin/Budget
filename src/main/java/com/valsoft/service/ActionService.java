@@ -3,6 +3,10 @@ package com.valsoft.service;
 import com.valsoft.dao.ActionDAO;
 import com.valsoft.dao.IActionDAO;
 import com.valsoft.model.Action;
+import com.valsoft.model.BudgetUser;
+import com.valsoft.model.SubAction;
+import com.valsoft.model.SubCategory;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,17 +35,39 @@ public class ActionService implements IActionService {
 
     @Override
     public void updateAction(Action action) {
-        Action entity = dao.findById(action.getId());
-        if(entity!=null){
-            //entity.setBudgetUser(action.getBudgetUser());
-            entity.setType(action.getType());
-        }
-
+        dao.updateAction(action);
     }
 
     @Override
     public List<Action> getAllByUserBudget(Long user_budget_id){
         return dao.findByUserBudget(user_budget_id);
+    }
+
+    @Override
+    public List<Action> findByBudgetId(Long budget_id) {
+        return dao.findByBudgetId(budget_id);
+    }
+
+    @Override
+    public void addNewAction(SubAction subAction, Long busget_user_id, Long subcategory_id) {
+        BudgetUser budgetUser = new BudgetUser();
+        budgetUser.setId(busget_user_id);
+
+        SubCategory subCategory = new SubCategory();
+        subCategory.setId(subcategory_id);
+
+        Action action = new Action();
+        action.setSubCategory(subCategory);
+        action.setBudgetUser(budgetUser);
+        action.getSubActions().add(subAction);
+        subAction.setAction(action);
+        action.setCreateDate(new LocalDate());
+        saveAction(action);
+    }
+
+    @Override
+    public void deleteAction(Action action) {
+        dao.deleteAction(action);
     }
 
     @Override

@@ -15,4 +15,6 @@ public interface ISubActionDAO {
     void deleteSubActionById(Long id);
 
     List<SubAction> findAllSubActions();
+
+    Integer getCountSubcategories(Long subcat_id);
 }

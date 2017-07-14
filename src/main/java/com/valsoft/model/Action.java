@@ -1,7 +1,16 @@
 package com.valsoft.model;
 
+import javafx.util.converter.LocalDateStringConverter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,22 +25,31 @@ public class Action {
     @Column(name = "ACTION_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BUDGET_USER_ID")
     private BudgetUser budgetUser;
 
-    @ManyToOne
+    @NotNull
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Column(nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    private LocalDate createDate;
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
+    private SubCategory subCategory;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "action", cascade = CascadeType.ALL)
-    private Set<SubAction> subActions;
-
-
-
-    @Size(min = 3, max = 50)
-    @Column(name = "TYPE")
-    private String type;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "action", orphanRemoval = true,  cascade = CascadeType.ALL)
+    @OrderBy("id DESC")
+    private Set<SubAction> subActions = new HashSet<>();
 
     public Action() {
     }
@@ -60,30 +78,21 @@ public class Action {
         this.budgetUser = budgetUser;
     }
 
-    public Category getCategory() {
-        return category;
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
 
     @Override
     public String toString() {
         return "Action{" +
                 "id=" + id +
-                ", budgetUser="  +
-                ", type='" + type + '\'' +
+                ", createDate=" + createDate +
+                ", subCategory=" + subCategory +
+                ", subActions=" + subActions +
                 '}';
     }
-
 }

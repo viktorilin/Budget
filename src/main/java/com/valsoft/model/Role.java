@@ -21,7 +21,6 @@ public class Role {
     private Long id;
 
     @Column(name = "NAME")
-    @Author({"ADMINISTRATOR","MODERATOR","USER"})
     private String name;
 
     /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -1,6 +1,7 @@
 package com.valsoft.service;
 
 import com.valsoft.model.Action;
+import com.valsoft.model.SubAction;
 
 import java.util.List;
 
@@ -19,5 +20,11 @@ public interface IActionService {
     List<Action> findAllActions();
 
     List<Action> getAllByUserBudget(Long user_budget_id);
+
+    List<Action> findByBudgetId(Long budget_id);
+
+    void addNewAction(SubAction subAction, Long busget_user_id, Long subcategory_id);
+
+    void deleteAction(Action action);
 
 }

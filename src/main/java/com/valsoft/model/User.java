@@ -37,18 +37,17 @@ public class User {
     @Column(name = "SECOND_NAME", nullable = false)
     private String secondName;
 
-    @ManyToOne
-    //@JoinTable(name = "ROLE")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLE_ID", nullable = false)
     private Role role;
 
     @Column(name = "IMAGE")
     private String image;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "admin")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "admin")
     private Set<Budget> adminedBudgets;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
     private Set<BudgetUser> budgetUsers;
 
 
@@ -145,7 +144,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-             //   ", role=" + role +
+                ", role=" + role +
                 ", image='" + image + '\'' +
                 '}';
     }

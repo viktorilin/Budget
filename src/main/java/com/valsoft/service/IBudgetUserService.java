@@ -19,4 +19,6 @@ public interface IBudgetUserService {
     List<BudgetUser> findAllBudgetUsers();
 
     BudgetUser getByuserBudget(Long user_id, Long budget_id);
+
+    Long getBudgetUserID(Long user_id, Long budget_id);
 }

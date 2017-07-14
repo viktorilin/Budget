@@ -1,6 +1,8 @@
 package com.valsoft.model;
 
 import com.sun.javafx.beans.IDProperty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -15,14 +17,12 @@ public class SubAction {
     @Column(name = "SUB_ACTION_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACTION_ID")
     private Action action;
 
-//    @ManyToOne
-//    @JoinColumn(name = "CATEGORY_ID")
-//    private Category category;
-    public SubAction(){}
+    @Column
+    private Double amount;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -30,6 +30,23 @@ public class SubAction {
     @Column(name = "PICTURE")
     private String picture;
 
+
+    public SubAction(){}
+
+    public SubAction(Action action, Double amount, String description, String picture) {
+        this.action = action;
+        this.amount = amount;
+        this.description = description;
+        this.picture = picture;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 
     public Long getId() {
         return id;
@@ -47,14 +64,6 @@ public class SubAction {
         this.action = action;
     }
 
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
-
     public String getDescription() {
         return description;
     }
@@ -71,5 +80,13 @@ public class SubAction {
         this.picture = picture;
     }
 
-
+    @Override
+    public String toString() {
+        return "SubAction{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
+                '}';
+    }
 }

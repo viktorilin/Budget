@@ -3,6 +3,9 @@ package com.valsoft.dao;
 import com.valsoft.model.SubAction;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.LongType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,15 +27,23 @@ public class SubActionDAO extends AbstractDAO<Long, SubAction> implements ISubAc
 
     @Override
     public void deleteSubActionById(Long id) {
-        Query query = getSession().createSQLQuery("delete from SUB_ACTION where SUB_ACTION_ID = :id");
-        query.setLong("SUB_ACTION_ID",id);
-        query.executeUpdate();
-
+        SubAction subAction = new SubAction();
+        subAction.setId(id);
+        getSession().delete(subAction);
     }
 
     @Override
     public List<SubAction> findAllSubActions() {
         Criteria criteria = createEntityCriteria();
         return (List<SubAction>) criteria.list();
+    }
+
+    @Override
+    public Integer getCountSubcategories(Long subcat_id) {
+
+        SQLQuery query = getSession().createSQLQuery("SELECT count(*) as count FROM sub_action WHERE action_id = :p_action_id ");
+        query.setParameter("p_action_id", subcat_id);
+        query.addScalar("count", new IntegerType());
+        return (Integer) query.uniqueResult();
     }
 }
