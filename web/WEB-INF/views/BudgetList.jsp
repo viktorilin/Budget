@@ -40,8 +40,8 @@
                 <td><c:out value="${budget.name}" /></td>
                 <td>
                     <a href="/budget/edit/<c:out value='${budget.id}' />">Edit</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/budget/delete/<c:out value='${budget.id}'/>">Delete</a>
+                    <a href="/budget/users/<c:out value='${budget.id}'/>">Users</a>
                 </td>
             </tr>
         </c:forEach>

@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <html>
 <head>
@@ -25,44 +25,52 @@
 </center>
 <div align="center">
     <%--<c:if test="${budget != null}">--%>
-        <form:form action="/budget/insert" method="POST" modelAttribute="budget">
+    <form:form action="/budget/insert" method="POST" modelAttribute="budget">
         <%--</c:if>--%>
         <%--<c:if test="${budget == null}">--%>
         <%--<f action="/budget/insert" method="POST">--%>
-            <%--</c:if>--%>
-            <table border="1" cellpadding="5">
-                <caption>
-                    <h2>
+        <%--</c:if>--%>
+        <table border="1" cellpadding="5">
+            <caption>
+                <h2>
                         <%--<c:if test="${budget != null}">--%>
-                            <%--Edit Budget--%>
+                        <%--Edit Budget--%>
                         <%--</c:if>--%>
                         <%--<c:if test="${budget == null}">--%>
-                            Add New Budget
+                    Add New Budget
                         <%--</c:if>--%>
-                    </h2>
-                </caption>
+                </h2>
+            </caption>
                 <%--<c:if test="${budget != null}">--%>
-                    <%--<input type="hidden" name="id" value="<c:out value='${budget.id}' />" />--%>
+                <%--<input type="hidden" name="id" value="<c:out value='${budget.id}' />" />--%>
                 <%--</c:if>--%>
-                <tr>
-                    <th>Creation Date: </th>
-                    <td><form:input path="creationDate"/></td>
-                </tr>
-                <tr>
-                    <th>Description: </th>
-                    <td><form:input path="description"/></td>
-                </tr>
-                <tr>
-                    <th>Name: </th>
-                    <td><form:input path="name"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" value="Save" />
-                    </td>
-                </tr>
-            </table>
-        </form:form>
+            <tr>
+                <th>Creation Date:</th>
+                <td><form:input path="creationDate"/></td>
+            </tr>
+            <tr>
+                <th>Description:</th>
+                <td><form:input path="description"/></td>
+            </tr>
+            <tr>
+                <th>Name:</th>
+                <td><form:input path="name"/></td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>
+                    <%--<form:select path="admin">--%>
+                        <%--<form:options items="${userList.nickName}" />--%>
+                    <%--</form:select>--%>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Save"/>
+                </td>
+            </tr>
+        </table>
+    </form:form>
 </div>
 </body>
 </html>

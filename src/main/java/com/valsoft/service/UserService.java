@@ -52,4 +52,9 @@ public class UserService implements IUserService {
     public List<User> findAllUsers() {
         return dao.findAllUsers();
     }
+
+    @Override
+    public List<User> findByBudgetId(Long budgetId) {
+        return dao.findByBydgetId(budgetId);
+    }
 }

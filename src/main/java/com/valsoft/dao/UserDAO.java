@@ -41,4 +41,11 @@ public class UserDAO extends AbstractDAO<Long, User> implements IUserDAO {
         Criteria criteria = createEntityCriteria();
         return (List<User>) criteria.list();
     }
+
+    @Override
+    public List<User> findByBydgetId(Long budgetId) {
+        Query query = getSession().createQuery("SELECT u FROM User u JOIN u.budgetUsers bu where bu.budget.id = :p_udget_id");
+        query.setLong("p_udget_id", budgetId);
+        return query.list();
+    }
 }

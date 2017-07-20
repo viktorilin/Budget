@@ -1,9 +1,8 @@
 package com.valsoft.model;
 
-import org.hibernate.annotations.ManyToAny;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -18,28 +17,35 @@ public class User {
     @Column(name = "USER1_ID")
     private Long id;
 
+
+
    // @Size(min = 3, max = 50)
-    @Column(name = "NICK_NAME", nullable = false)
+    @Column(name = "NICK_NAME",unique = true)
     private String nickName;
 
    // @Size(min = 6, max = 20)
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "EMAIL", nullable = false)
+   // @Email
+    @Column(name = "EMAIL",unique = true)
     private String email;
 
  //   @Size(min = 3, max = 50)
-    @Column(name = "FIRST_NAME", nullable = false)
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
  //   @Size(min = 3, max = 50)
-    @Column(name = "SECOND_NAME", nullable = false)
+    @Column(name = "SECOND_NAME")
     private String secondName;
 
-    @ManyToOne
-    //@JoinTable(name = "ROLE")
-    @JoinColumn(name = "ROLE_ID", nullable = false)
+//    @ManyToOne
+//    //@JoinTable(name = "ROLE")
+//    @JoinColumn(name = "ROLE_ID", nullable = false)
+//    private Role role;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
 
     @Column(name = "IMAGE")

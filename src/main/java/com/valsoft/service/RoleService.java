@@ -17,34 +17,34 @@ import java.util.List;
 @Transactional
 public class RoleService implements IRoleService {
 
-    @Autowired
-    private IRoleDAO dao;
-
-    @Override
-    public Role findById(Long id) {
-        return dao.findById(id);
-    }
-
-    @Override
-    public void saveRole(Role role) {
-        dao.saveRole(role);
-    }
-
-    @Override
-    public void updateRole(Role role) {
-        Role entity = dao.findById(role.getId());
-        if(entity!=null){
-            entity.setName(role.getName());
-        }
-    }
-
-    @Override
-    public void deleteRoleById(Long id) {
-        dao.deleteRoleById(id);
-    }
-
-    @Override
-    public List<Role> findAllRoles() {
-        return dao.findAllRoles();
-    }
+//    @Autowired
+//    private IRoleDAO dao;
+//
+//    @Override
+//    public Role findById(Long id) {
+//        return dao.findById(id);
+//    }
+//
+//    @Override
+//    public void saveRole(Role role) {
+//        dao.saveRole(role);
+//    }
+//
+//    @Override
+//    public void updateRole(Role role) {
+//        Role entity = dao.findById(role.getId());
+//        if(entity!=null){
+//            entity.setName(role.getName());
+//        }
+//    }
+//
+//    @Override
+//    public void deleteRoleById(Long id) {
+//        dao.deleteRoleById(id);
+//    }
+//
+//    @Override
+//    public List<Role> findAllRoles() {
+//        return dao.findAllRoles();
+//    }
 }

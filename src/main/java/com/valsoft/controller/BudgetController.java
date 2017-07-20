@@ -4,6 +4,7 @@ import com.valsoft.model.Budget;
 import com.valsoft.model.Role;
 import com.valsoft.model.User;
 import com.valsoft.service.IBudgetService;
+import com.valsoft.service.IBudgetUserService;
 import com.valsoft.service.IRoleService;
 import com.valsoft.service.IUserService;
 import org.joda.time.LocalDate;
@@ -31,6 +32,8 @@ import java.util.List;
 @ComponentScan("com.valsoft")
 public class BudgetController {
 
+    @Autowired
+    private IBudgetUserService budgetUserService;
     @Autowired
     private IBudgetService budgetService;
 
@@ -80,17 +83,18 @@ public class BudgetController {
 //        newBudget.setDescription(description);
 //        newBudget.setName(name);
 //        newBudget.setCreationDate(localDate);
+       // model.addAttribute("userList",userService.findAllUsers());
         User user = new User();
-        Role role = new Role();
-        role.setName("test");
-        roleService.saveRole(role);
+//        Role role = new Role();
+//        role.setName("test");
+        //roleService.saveRole(role);
         user.setNickName("test");
         user.setPassword("test");
         user.setEmail("test");
         user.setFirstName("test");
         user.setImage("test");
         user.setSecondName("test");
-        user.setRole(role);
+     //   user.setRole(role);
         userService.saveUser(user);
         budget.setAdmin(user);
         budgetService.saveBudget(budget);
@@ -124,5 +128,25 @@ public class BudgetController {
         return "redirect:/budget/list";
 
     }
+
+    @RequestMapping(value = "/users/{budget_id}", method = RequestMethod.GET)
+    private String showUsersBudget(@PathVariable Long budget_id, ModelMap model)
+            throws SQLException, IOException {
+
+        model.addAttribute("listBudgetUsers",userService.findByBudgetId(budget_id));
+        return "BudgetUserList";
+
+    }
+
+    @RequestMapping(value = "/adminedBudget/{budget_id}", method = RequestMethod.GET)
+    private String showAdminedBudget(@PathVariable Long user_id, ModelMap model)
+            throws SQLException, IOException {
+        model.addAttribute("listBudgetAdmined",userService.findById(user_id).getAdminedBudgets());
+        return "AdninedBudgets";
+
+    }
+
+    //додавання юзерів в бюджет окремо
+
 
 }

@@ -4,7 +4,7 @@ import com.valsoft.model.Action;
 import com.valsoft.model.Budget;
 import com.valsoft.model.User;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -15,4 +15,6 @@ public interface IBudgetUserDAO {
     void deleteBudgetUserById(Long id);
 
     List<BudgetUser> findAllBudgetUsers();
+
+    List getAllByBudgetId(Long budgetId);
 }
