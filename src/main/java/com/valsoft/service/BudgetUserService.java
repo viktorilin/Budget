@@ -57,4 +57,9 @@ public class BudgetUserService implements IBudgetUserService {
         return dao.getBudgetUserID(user_id, budget_id);
     }
 
+
+    @Override
+    public List<BudgetUser> getAllByBudgetId(Long budgetId) {
+        return dao.getAllByBudgetId(budgetId);
+    }
 }

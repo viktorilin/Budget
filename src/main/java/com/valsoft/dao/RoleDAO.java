@@ -13,31 +13,31 @@ import java.util.List;
  */
 @Repository
 public class RoleDAO extends AbstractDAO<Long, Role> implements IRoleDAO {
-
-    @Override
-    public Role findById(Long id) {
+//
+//    @Override
+//    public Role findById(Long id) {
+////        Criteria criteria = createEntityCriteria();
+////        criteria.add(Restrictions.eq("ROLE_ID", id));
+////        return (User) criteria.uniqueResult();
+//        return getByKey(id);    }
+//
+//    @Override
+//    public void saveRole(Role role) {
+//        persist(role);
+//
+//    }
+//
+//    @Override
+//    public void deleteRoleById(Long id) {
+//        Query query = getSession().createSQLQuery("delete from ROLE where ROLE_ID = :id");
+//        query.setLong("ROLE_ID",id);
+//        query.executeUpdate();
+//
+//    }
+//
+//    @Override
+//    public List<Role> findAllRoles() {
 //        Criteria criteria = createEntityCriteria();
-//        criteria.add(Restrictions.eq("ROLE_ID", id));
-//        return (User) criteria.uniqueResult();
-        return getByKey(id);    }
-
-    @Override
-    public void saveRole(Role role) {
-        persist(role);
-
-    }
-
-    @Override
-    public void deleteRoleById(Long id) {
-        Query query = getSession().createSQLQuery("delete from ROLE where ROLE_ID = :id");
-        query.setLong("ROLE_ID",id);
-        query.executeUpdate();
-
-    }
-
-    @Override
-    public List<Role> findAllRoles() {
-        Criteria criteria = createEntityCriteria();
-        return (List<Role>) criteria.list();
-    }
+//        return (List<Role>) criteria.list();
+//    }
 }

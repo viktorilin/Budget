@@ -17,4 +17,6 @@ public interface IUserDAO {
 
     List<User> findAllUsers();
 
+    List<User> findByBydgetId(Long budgetId);
+
 }
