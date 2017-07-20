@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,6 +19,8 @@ import java.util.Map;
  */
 @Controller
 public class ActionControler {
+
+	private static final int MAX_RESULT = 5;
 
 	@Autowired
 	private IUserService userService;
@@ -45,11 +48,17 @@ public class ActionControler {
 
 	@Transactional
 	@RequestMapping(value = "/budget/{budget_id}/actions", method = RequestMethod.GET)
-	public String getAllActions(@PathVariable("budget_id") Long budget_id, Model model){
+	public String getAllActions(
+			@RequestParam(value = "page", required = false,defaultValue = "1") int page,
+			@PathVariable("budget_id") Long budget_id, Model model){
 		//test(1l);
+		List<Action> actions = actionService.findByBudgetIdPages(budget_id, page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT);
 		model.addAttribute("type", "all");
+		model.addAttribute("isCategory", "false");
 		model.addAttribute("budget_user", budgetUserService.getByuserBudget(2l, budget_id));
-		model.addAttribute("actions", actionService.findByBudgetId(budget_id));
+		model.addAttribute("categories", categoryService.findAllCategories());
+		model.addAttribute("actions", actions);
+		model.addAttribute("pages",(int)Math.ceil(actionService.countByBudgetId(budget_id)/MAX_RESULT+1));
 		return "actions";
 	}
 
@@ -69,10 +78,15 @@ public class ActionControler {
 	}
 
 	@RequestMapping(value="/budgetuser/{budget_user_id}/actions", method = RequestMethod.GET)
-	public String getActions(@PathVariable("budget_user_id") Long budgetUserId, Model model){
+	public String getActions(
+			@RequestParam(value = "page" ,required = false, defaultValue = "1") int page,
+			@PathVariable("budget_user_id") Long budgetUserId, Model model){
 		model.addAttribute("type", "my");
-		model.addAttribute("actions", actionService.getAllByUserBudget(budgetUserId));
+		model.addAttribute("isCategory", "false");
+		model.addAttribute("actions", actionService.getAllByUserBudgetPage(budgetUserId,page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT));
+		model.addAttribute("pages",(int)Math.ceil(actionService.countByUserBudget(budgetUserId)/MAX_RESULT+1));
 		BudgetUser budgetUser = budgetUserService.findById(budgetUserId);
+		model.addAttribute("categories", categoryService.findAllCategories());
 		model.addAttribute("budget_user", budgetUser);
 		model.addAttribute("budget_id", budgetUser.getBudget().getId());
 		return "actions";
@@ -134,6 +148,59 @@ public class ActionControler {
 		}
 		return subcategories;
 	}
+
+
+
+	@Transactional
+	@RequestMapping(value = "/budget/{budget_id}/actions/category/{category}", method = RequestMethod.GET)
+	public String getAllActionsByCategory(
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@PathVariable("category") long category_id,
+			@PathVariable("budget_id") Long budget_id, Model model){
+
+		model.addAttribute("type", "all");
+		model.addAttribute("isCategory", "true");
+		model.addAttribute("budget_user", budgetUserService.getByuserBudget(2l, budget_id));
+		model.addAttribute("categories", categoryService.findAllCategories());
+		model.addAttribute("actions", actionService.findByBudgetIdAndCategoreIdPage(budget_id, category_id, page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT));
+		model.addAttribute("pages",(int)Math.ceil(actionService.countByBudgetIdAndCategoreId(budget_id, category_id)/MAX_RESULT+1));
+		model.addAttribute("category_id",category_id);
+		return "actions";
+	}
+
+
+	@RequestMapping(value="/budgetuser/{budget_user_id}/actions/category/{category}", method = RequestMethod.GET)
+	public String getActionsByCategory(
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@PathVariable("category") Long categoryId,
+			@PathVariable("budget_user_id") Long budgetUserId, Model model){
+		model.addAttribute("category_id",categoryId);
+		model.addAttribute("isCategory", "true");
+		model.addAttribute("type", "my");
+		model.addAttribute("actions", actionService. getAllByUserBudgetAndCategoryIdPage(budgetUserId, categoryId,page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT));
+		BudgetUser budgetUser = budgetUserService.findById(budgetUserId);
+		model.addAttribute("categories", categoryService.findAllCategories());
+		model.addAttribute("budget_user", budgetUser);
+		model.addAttribute("budget_id", budgetUser.getBudget().getId());
+		model.addAttribute("pages",(int)Math.ceil(actionService.countAllByUserBudgetAndCategoryId(budgetUserId, categoryId)/MAX_RESULT+1));
+
+
+
+		return "actions";
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	@Transactional
 	private void test(Long budgetUserId){

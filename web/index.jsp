@@ -14,7 +14,7 @@
 
   <ul>
     <li><a href="/budgetuser/2/actions">My actions</a></li>
-    <li><a href="/budget/1/actions">All actions</a></li>
+    <li><a href="/budget/1/actions?page=1">All actions</a></li>
     <li><a href="/category/1/subcategories">Subcategories</a></li>
   </ul>
 
