@@ -20,6 +20,5 @@ public interface IBudgetUserDAO {
 
     Long getBudgetUserID(Long userId, Long budgetId);
 
-
-    List getAllByBudgetId(Long budgetId);
+    List<BudgetUser> getAllByBudgetId(Long budgetId);
 }

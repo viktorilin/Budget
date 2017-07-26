@@ -54,4 +54,9 @@ public class BudgetService implements IBudgetService {
     public List<Budget> findAllBudgets() {
         return dao.findAllBudgets();
     }
+
+    @Override
+    public List<Budget> findAllByAdminId(Long adminId) {
+        return dao.findAllByAdminId(adminId);
+    }
 }

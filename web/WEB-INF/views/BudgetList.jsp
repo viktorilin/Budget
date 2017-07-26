@@ -42,6 +42,7 @@
                     <a href="/budget/edit/<c:out value='${budget.id}' />">Edit</a>
                     <a href="/budget/delete/<c:out value='${budget.id}'/>">Delete</a>
                     <a href="/budget/users/<c:out value='${budget.id}'/>">Users</a>
+                    <a href="/budget/addUsers/<c:out value='${budget.id}'/>">add Users</a>
                 </td>
             </tr>
         </c:forEach>

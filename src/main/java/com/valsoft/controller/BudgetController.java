@@ -1,8 +1,10 @@
 package com.valsoft.controller;
 
 import com.valsoft.model.Budget;
+import com.valsoft.model.BudgetUser;
 import com.valsoft.model.Role;
 import com.valsoft.model.User;
+import com.valsoft.model.dto.BudgetIdUserIdDTO;
 import com.valsoft.service.IBudgetService;
 import com.valsoft.service.IBudgetUserService;
 import com.valsoft.service.IRoleService;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,19 +87,19 @@ public class BudgetController {
 //        newBudget.setName(name);
 //        newBudget.setCreationDate(localDate);
        // model.addAttribute("userList",userService.findAllUsers());
-        User user = new User();
-//        Role role = new Role();
-//        role.setName("test");
-        //roleService.saveRole(role);
-        user.setNickName("test");
-        user.setPassword("test");
-        user.setEmail("test");
-        user.setFirstName("test");
-        user.setImage("test");
-        user.setSecondName("test");
-     //   user.setRole(role);
-        userService.saveUser(user);
-        budget.setAdmin(user);
+//        User user = new User();
+////        Role role = new Role();
+////        role.setName("test");
+//        //roleService.saveRole(role);
+//        user.setNickName("test");
+//        user.setPassword("test");
+//        user.setEmail("test");
+//        user.setFirstName("test");
+//        user.setImage("test");
+//        user.setSecondName("test");
+//     //   user.setRole(role);
+//        userService.saveUser(user);
+//        budget.setAdmin(user);
         budgetService.saveBudget(budget);
         return "redirect:/budget/list";
     }
@@ -138,15 +141,38 @@ public class BudgetController {
 
     }
 
-    @RequestMapping(value = "/adminedBudget/{budget_id}", method = RequestMethod.GET)
-    private String showAdminedBudget(@PathVariable Long user_id, ModelMap model)
+    @RequestMapping(value = "/adminedBudget/{admin_id}", method = RequestMethod.GET)
+    private String showAdminedBudget(@PathVariable Long admin_id, ModelMap model)
             throws SQLException, IOException {
-        model.addAttribute("listBudgetAdmined",userService.findById(user_id).getAdminedBudgets());
-        return "AdninedBudgets";
+        model.addAttribute("listBudgetAdmined",budgetService.findAllByAdminId(admin_id));
+        return "AdminedBudgets";
+
+    }
+
+    @RequestMapping(value = "/addUsers/{budget_id}", method = RequestMethod.GET)
+    private String addUsersToBudget(@PathVariable Long budget_id, ModelMap model)
+            throws SQLException, IOException {
+        model.addAttribute("userList",userService.findAllUsers());
+        BudgetIdUserIdDTO budgetIdUserIdDTO = new BudgetIdUserIdDTO();
+        budgetIdUserIdDTO.setBudgetId(budget_id);
+        model.addAttribute("budgetUser",budgetIdUserIdDTO);
+        model.addAttribute("listBudgetUsers",budgetUserService.getAllByBudgetId(budget_id));
+        return "AddUserToBudget";
 
     }
 
     //додавання юзерів в бюджет окремо
+    @RequestMapping(value = "/insertAll/budgetUser", method = RequestMethod.POST)
+    private String insertBudgetUser(@ModelAttribute("budgetUser") BudgetIdUserIdDTO budgetIdUserIdDTO, ModelMap model)
+            throws SQLException, IOException {
+        System.out.println(budgetIdUserIdDTO.getBudgetId());
+        System.out.println(budgetIdUserIdDTO.getUserId());
+        BudgetUser budgetUser = new BudgetUser();
+        budgetUser.setBudget(budgetService.findById(budgetIdUserIdDTO.getBudgetId()));
+        budgetUser.setUser(userService.findById(budgetIdUserIdDTO.getUserId()));
+        budgetUserService.saveBudgetUser(budgetUser);
+        return "redirect:/budget/addUsers/"+budgetIdUserIdDTO.getBudgetId();
+    }
 
 
 }

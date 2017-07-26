@@ -1,12 +1,9 @@
 package com.valsoft.dao;
 
 import com.valsoft.model.BudgetUser;
-import com.valsoft.model.User;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-import org.hibernate.metamodel.binding.HibernateTypeDescriptor;
 import org.hibernate.type.LongType;
 import org.springframework.stereotype.Repository;
 
@@ -59,11 +56,15 @@ public class BudgetUserDAO extends AbstractDAO<Long, BudgetUser> implements IBud
 
     @Override
     public List<BudgetUser> getAllByBudgetId(Long budgetId) {
-        Query query = getSession().createQuery("SELECT * FROM budget_user  where budget.id = :id");
-        query.setParameter("id", budgetId);
-        return query.list() ;
+//        Query query = getSession().createQuery("FROM budgetUser  where budget_id = :id");
+//        query.setParameter("id", budgetId);
+//        return (List<BudgetUser>) query.uniqueResult();
 //        Query query = getSession().createQuery("from BudgetUser  WHERE budget.id = :id ORDER BY id DESC");
 //        query.setLong("id",budgetId);
 //        return query.list();
+        Query query = getSession().createQuery("from BudgetUser WHERE budget_id = :p_budget_id");
+        query.setParameter("p_budget_id", budgetId);
+        return (List<BudgetUser>) query.list();
+
     }
 }

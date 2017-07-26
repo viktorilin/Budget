@@ -19,4 +19,6 @@ public interface IBudgetService {
     void deleteBudget(Budget budget);
 
     List<Budget> findAllBudgets();
+
+    List<Budget> findAllByAdminId(Long adminId);
 }

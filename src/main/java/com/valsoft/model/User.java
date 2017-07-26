@@ -44,7 +44,7 @@ public class User {
     @Column(name = "IMAGE")
     private String image;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "admin")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "admin")
     private Set<Budget> adminedBudgets;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
