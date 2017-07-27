@@ -72,8 +72,11 @@
                     </th>
                     <th class="text-center">Subcat</th>
                     <th class="text-center">User</th>
+                    <th>Costs/profit</th>
                     <th colspan="3">Date</th>
+
                 </tr>
+                <c:set var="costId" value="0"/>
                 <c:forEach var="action" items="${actions}">
                     <tr <c:if test="${type.equals(\"all\")}">
                         <c:if test="${action.budgetUser.id == budget_user.id}">class="warning"</c:if>
@@ -81,6 +84,10 @@
                         <td>${action.subCategory.category.name}</td>
                         <td class="text-center">${action.subCategory.name}</td>
                         <td class="text-center">${action.budgetUser.user.nickName}</td>
+                        <td>
+                                ${cost.get(costId)}
+                            <c:set var="costId" value="${costId+1}"/>
+                        </td>
                         <td>${action.createDate}</td>
                         <td class="subaction_link"><a href="/action/${action.id}/subactions"
                                                       class="btn btn-primary btn-xs">Subactions <span
@@ -99,6 +106,8 @@
                                 <a href="/action/${action.id}/delete" class="btn btn-primary btn-xs delete-item">x</a>
                             </c:if>
                         </td>
+
+
                     </tr>
                 </c:forEach>
                 <tr>

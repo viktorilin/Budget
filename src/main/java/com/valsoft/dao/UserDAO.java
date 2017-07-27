@@ -37,6 +37,30 @@ public class UserDAO extends AbstractDAO<Long, User> implements IUserDAO {
     }
 
     @Override
+    public Boolean emailExists(String email) {
+        return getByEmail(email) != null;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        Query query = getSession().createQuery("SELECT u FROM User u  where u.email = :email");
+        query.setParameter("email", email);
+        return (User) query.uniqueResult();
+    }
+
+    @Override
+    public Boolean usernameExists(String username) {
+        return getByUserName(username) != null;
+    }
+
+    @Override
+    public User getByUserName(String userName) {
+        Query query = getSession().createQuery("SELECT u FROM User u  where u.nickName = :nickName");
+        query.setParameter("nickName", userName);
+        return (User) query.uniqueResult();
+    }
+
+    @Override
     public List<User> findAllUsers() {
         Criteria criteria = createEntityCriteria();
         return (List<User>) criteria.list();

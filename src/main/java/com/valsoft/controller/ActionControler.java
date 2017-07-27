@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,12 +54,17 @@ public class ActionControler {
 			@PathVariable("budget_id") Long budget_id, Model model){
 		//test(1l);
 		List<Action> actions = actionService.findByBudgetIdPages(budget_id, page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT);
+		List<Double> cost = new ArrayList<>();
+		for(Action a:actions){
+			cost.add(actionService.getSumSubAction(a.getId()));
+		}
 		model.addAttribute("type", "all");
 		model.addAttribute("isCategory", "false");
 		model.addAttribute("budget_user", budgetUserService.getByuserBudget(2l, budget_id));
 		model.addAttribute("categories", categoryService.findAllCategories());
 		model.addAttribute("actions", actions);
 		model.addAttribute("pages",(int)Math.ceil(actionService.countByBudgetId(budget_id)/MAX_RESULT+1));
+		model.addAttribute("cost", cost);
 		return "actions";
 	}
 
@@ -81,14 +87,20 @@ public class ActionControler {
 	public String getActions(
 			@RequestParam(value = "page" ,required = false, defaultValue = "1") int page,
 			@PathVariable("budget_user_id") Long budgetUserId, Model model){
+		List<Action> actions = actionService.getAllByUserBudgetPage(budgetUserId,page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT);
 		model.addAttribute("type", "my");
 		model.addAttribute("isCategory", "false");
-		model.addAttribute("actions", actionService.getAllByUserBudgetPage(budgetUserId,page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT));
+		model.addAttribute("actions", actions);
 		model.addAttribute("pages",(int)Math.ceil(actionService.countByUserBudget(budgetUserId)/MAX_RESULT+1));
 		BudgetUser budgetUser = budgetUserService.findById(budgetUserId);
 		model.addAttribute("categories", categoryService.findAllCategories());
 		model.addAttribute("budget_user", budgetUser);
 		model.addAttribute("budget_id", budgetUser.getBudget().getId());
+		List<Double> cost = new ArrayList<>();
+		for(Action a:actions){
+			cost.add(actionService.getSumSubAction(a.getId()));
+		}
+		model.addAttribute("cost", cost);
 		return "actions";
 	}
 
@@ -157,14 +169,19 @@ public class ActionControler {
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@PathVariable("category") long category_id,
 			@PathVariable("budget_id") Long budget_id, Model model){
-
+		List<Action> actions = actionService.findByBudgetIdAndCategoreIdPage(budget_id, category_id, page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT);
 		model.addAttribute("type", "all");
 		model.addAttribute("isCategory", "true");
 		model.addAttribute("budget_user", budgetUserService.getByuserBudget(2l, budget_id));
 		model.addAttribute("categories", categoryService.findAllCategories());
-		model.addAttribute("actions", actionService.findByBudgetIdAndCategoreIdPage(budget_id, category_id, page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT));
+		model.addAttribute("actions", actions);
 		model.addAttribute("pages",(int)Math.ceil(actionService.countByBudgetIdAndCategoreId(budget_id, category_id)/MAX_RESULT+1));
 		model.addAttribute("category_id",category_id);
+		List<Double> cost = new ArrayList<>();
+		for(Action a:actions){
+			cost.add(actionService.getSumSubAction(a.getId()));
+		}
+		model.addAttribute("cost", cost);
 		return "actions";
 	}
 
@@ -174,18 +191,21 @@ public class ActionControler {
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@PathVariable("category") Long categoryId,
 			@PathVariable("budget_user_id") Long budgetUserId, Model model){
+		List<Action> actions =  actionService. getAllByUserBudgetAndCategoryIdPage(budgetUserId, categoryId,page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT);
 		model.addAttribute("category_id",categoryId);
 		model.addAttribute("isCategory", "true");
 		model.addAttribute("type", "my");
-		model.addAttribute("actions", actionService. getAllByUserBudgetAndCategoryIdPage(budgetUserId, categoryId,page==1?0:(page-1)*MAX_RESULT+1, MAX_RESULT));
+		model.addAttribute("actions",actions);
 		BudgetUser budgetUser = budgetUserService.findById(budgetUserId);
 		model.addAttribute("categories", categoryService.findAllCategories());
 		model.addAttribute("budget_user", budgetUser);
 		model.addAttribute("budget_id", budgetUser.getBudget().getId());
 		model.addAttribute("pages",(int)Math.ceil(actionService.countAllByUserBudgetAndCategoryId(budgetUserId, categoryId)/MAX_RESULT+1));
-
-
-
+		List<Double> cost = new ArrayList<>();
+		for(Action a:actions){
+			cost.add(actionService.getSumSubAction(a.getId()));
+		}
+		model.addAttribute("cost", cost);
 		return "actions";
 	}
 

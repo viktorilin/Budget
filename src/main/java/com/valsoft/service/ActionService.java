@@ -121,6 +121,11 @@ public class ActionService implements IActionService {
     }
 
     @Override
+    public Double getSumSubAction(Long actionId) {
+        return dao.getSumSubAction(actionId);
+    }
+
+    @Override
     public void deleteActionById(Long id) {
         dao.deleteActionById(id);
     }

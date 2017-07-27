@@ -143,6 +143,13 @@ public class ActionDAO extends AbstractDAO<Long, Action> implements IActionDAO {
 		query.setMaxResults(maxResult);
 		return query.list();
 	}
+
+	@Override
+	public Double getSumSubAction(Long actionId) {
+		Query query = getSession().createQuery("select  sum(sb.amount) from SubAction sb where action.id =:actionId");
+		query.setParameter("actionId", actionId);
+		return (Double) query.uniqueResult();
+	}
 }
 
 

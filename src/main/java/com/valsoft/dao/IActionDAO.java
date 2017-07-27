@@ -44,6 +44,8 @@ public interface IActionDAO {
 
     List<Action> getAllByUserBudgetPage(Long user_budget_id, int firstResult, int maxResult);
 
+    Double getSumSubAction(Long actionId);
+
 
 }
 

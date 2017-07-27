@@ -48,4 +48,6 @@ public interface IActionService {
 
     void deleteAction(Action action);
 
+    Double getSumSubAction(Long actionId);
+
 }

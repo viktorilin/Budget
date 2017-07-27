@@ -15,6 +15,14 @@ public interface IUserDAO {
 
     void deleteUserById(Long id);
 
+    Boolean emailExists(String email);
+
+    User getByEmail(String email);
+
+    Boolean usernameExists(String username);
+
+    User getByUserName(String userName);
+
     List<User> findAllUsers();
 
     List<User> findByBydgetId(Long budgetId);
